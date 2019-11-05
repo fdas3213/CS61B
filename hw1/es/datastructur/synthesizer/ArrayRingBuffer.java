@@ -13,6 +13,28 @@ public class ArrayRingBuffer<T> implements BoundedQueue<T> {
     /* Capacity of the array */
     private int capacity;
 
+    public Iterator<T> iterator(){
+        return new ArrayBufferIterator();
+    }
+
+    private class ArrayBufferIterator implements Iterator<T>{
+        private int count;
+
+        public ArrayBufferIterator(){
+            count = 0;
+        }
+
+        public boolean hasNext(){
+            return count < capacity;
+        }
+
+        public T next(){
+            T x = rb[count];
+            count ++;
+            return x;
+        }
+    }
+
     /**
      * Create a new ArrayRingBuffer with the given capacity.
      */
@@ -77,7 +99,10 @@ public class ArrayRingBuffer<T> implements BoundedQueue<T> {
         return rb[first];
     }
 
-    // TODO: When you get to part 4, implement the needed code to support
-    //       iteration and equals.
+    public boolean equals(ArrayRingBuffer o){
+        return this.first==o.first && this.last==o.last && this.capacity==o.capacity
+                && this.fillCount==o.fillCount && this.rb.equals(o.rb);
+    }
+
 }
-    // TODO: Remove all comments that say TODO when you're done.
+
