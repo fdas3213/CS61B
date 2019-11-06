@@ -45,6 +45,7 @@ public class UnionFind {
        vertex with itself or vertices that are already connected should not 
        change the sets but may alter the internal structure of the data. */
     public void union(int v1, int v2) {
+        /* put the smaller set to the bigger set */
         if(connected(v1,v2)) return;
         validate(v1);
         validate(v2);
@@ -53,11 +54,11 @@ public class UnionFind {
         int r1 = find(v1);
         int r2 = find(v2);
         if(s1 < s2){
-            arr[r2] = r1;
-            arr[r1] -= s2;
-        }else{
             arr[r1] = r2;
             arr[r2] -= s1;
+        }else{
+            arr[r2] = r1;
+            arr[r1] -= s2;
         }
 
     }
