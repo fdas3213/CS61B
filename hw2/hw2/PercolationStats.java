@@ -45,4 +45,14 @@ public class PercolationStats {
         return mean() + confidence_level * stddev() / Math.sqrt(nExp);
     }
 
+    public static void main(String[] args){
+        PercolationFactory pf = new PercolationFactory();
+        int size = 10;
+        int numExp = 1000;
+        PercolationStats ps = new PercolationStats(size, numExp,pf);
+        System.out.println("mean: " + ps.mean());
+        System.out.println("stddev: " + ps.stddev());
+        System.out.println("confidence interval: " + ps.confidenceLow() + ", " + ps.confidenceHigh());
+    }
+
 }
